@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LearnKotlin</string>
+    <string name="btn_text">Gönder</string>
+    <string name="register_text">Kayıt ol</string>
+    <string name="username_edittext_hint">Adınızı girin</string>
+    <string name="usersurname_edittext_hint">Soyadınızı girin</string>
+    <string name="welcome_text">Hoşgeldin %1$s %2$s</string>
+</resources>
