@@ -4,12 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.ActivityResultRegistry
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.izmir.learnkotlin.databinding.ActivityLoginBinding
 import com.izmir.learnkotlin.model.GameList
 import com.izmir.learnkotlin.util.Constant
+import com.izmir.learnkotlin.util.list
+import com.izmir.learnkotlin.util.listCount
+import com.izmir.learnkotlin.util.showImage
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,7 +38,6 @@ class LoginActivitiy  : AppCompatActivity() {
                 }
                 for (div in doc.select(Constant.QUERY_REGEX_GAME_ID)) {
                     gameIdList.add(div.attributes().html().split("=").get(2).replace("\"",""))
-                    //Log.i("ResultId", div.attributes().html().split("=").get(2).replace("\"",""))
                 }
                 if (gameNameList.isNotEmpty()){
                     gameNameList.let {
@@ -46,6 +46,7 @@ class LoginActivitiy  : AppCompatActivity() {
                         }
                     }
                 }
+
 
                 gameList.forEachIndexed { index, gameList ->
                     runOnUiThread {
@@ -64,10 +65,8 @@ class LoginActivitiy  : AppCompatActivity() {
                         val doc: Document = Jsoup.connect(Constant.URL_GAME_DETAIL + tab?.id.toString()).get()
                         runOnUiThread {
                             Log.i("TabSelect",doc.select(".tab-pane img").outerHtml().split("=").get(1).replace("\"","").replace("?t","") )
-                            Glide
-                                .with(this@LoginActivitiy)
-                                .load(doc.select(".tab-pane img").outerHtml().split("=").get(1).replace("\"","").replace("?t","").replace(">",""))
-                                .into(binding.ivGameImg)
+                            var imageUrl = doc.select(".tab-pane img").outerHtml().split("=").get(1).replace("\"","").replace("?t","").replace(">","")
+                            this@LoginActivitiy.showImage(imageUrl, binding.ivGameImg)
                         }
                     }
                 }
@@ -90,8 +89,9 @@ class LoginActivitiy  : AppCompatActivity() {
                         putExtra(Constant.USER_NAME_KEY ,edtName.text.toString())
                         putExtra(Constant.USER_SURNAME_KEY, edtSurname.text.toString())
                     }
-                    startActivity(intent)
                 }
+                val intentMessage = Intent(this@LoginActivitiy, MessageListActivity::class.java)
+                startActivity(intentMessage)
             }
         }
     }
