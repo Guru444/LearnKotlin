@@ -15,16 +15,14 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageVieHol
     var messageItemClickListener: (String) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MessageVieHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_learn_layout_constraint, parent, false)
-    )
+            LayoutInflater.from(parent.context).inflate(R.layout.activity_learn_layout_constraint, parent, false)
+        )
 
     override fun onBindViewHolder(holder: MessageListAdapter.MessageVieHolder, position: Int) {
        holder.bind(messageList[position]) // ahmet, mehmet, yusuf -> 0
     }
 
     override fun getItemCount() = messageList.size
-
 
     inner class MessageVieHolder(view: View) :  RecyclerView.ViewHolder(view){
         fun bind(messageItem: MessageItem) {
@@ -45,10 +43,15 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageVieHol
             itemView.rootView.setOnClickListener {
                 messageItemClickListener(messageItem.userName)
             }
+            itemView.remove_item.setOnClickListener {
+                messageList.removeAt(adapterPosition)
+                notifyItemRemoved(adapterPosition)
+            }
         }
     }
 
     fun listeyiDoldur(messageListesi: ArrayList<MessageItem>){
+        messageList.clear()
         messageList.addAll(messageListesi)
         notifyDataSetChanged()
     }

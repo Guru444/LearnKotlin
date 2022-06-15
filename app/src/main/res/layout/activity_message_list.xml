@@ -15,15 +15,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Mesaj listesi"/>
 
+    <EditText
+        android:id="@+id/edt_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="Item ismi"
+        app:layout_constraintTop_toBottomOf="@id/tb_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_added"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_item"
+        android:text="Item ekle"
+        android:layout_margin="12dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_messagelist"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_show_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_title"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_added" />
+
+
+    <Button
+        android:id="@+id/btn_show_game"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Oyunları göster"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

@@ -1,5 +1,6 @@
 package com.izmir.learnkotlin.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,7 +36,15 @@ class MessageListActivity : AppCompatActivity() {
             messageListAdapter.messageItemClickListener = {
                 Log.i("Item", it)
             }
-        }
 
+            btnAdded.setOnClickListener {
+                messageList.add(MessageItem(edtItem.text.toString(),"XXX",false,"12:45"))
+                messageListAdapter.listeyiDoldur(messageList)
+            }
+            btnShowGame.setOnClickListener {
+                var intent = Intent(this@MessageListActivity, GameListActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

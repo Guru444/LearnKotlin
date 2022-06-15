@@ -1,6 +1,7 @@
 package com.izmir.learnkotlin.util
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -13,6 +14,15 @@ fun Activity.showImage(url: String, imageView: ImageView){
         .load(url)
         .into(imageView)
 }
+
+fun Context.showImgUrl(url: String?, imageView: ImageView){
+    Glide
+        .with(this)
+        .load(url)
+        .into(imageView)
+}
+
+
 
 fun ArrayList<String>.listCount() : Int{
     return this.size
