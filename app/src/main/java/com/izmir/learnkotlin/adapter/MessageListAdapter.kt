@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_learn_layout_constraint.view.*
 class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageVieHolder>() {
 
     private var messageList: ArrayList<MessageItem> = arrayListOf()
-    var messageItemClickListener: (String) -> Unit = {}
+    var messageItemClickListener: (Int) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MessageVieHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.activity_learn_layout_constraint, parent, false)
@@ -40,10 +40,9 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageVieHol
                //messageItemClickListener(messageItem.userName)
                 return@setOnLongClickListener false
             }
-            itemView.rootView.setOnClickListener {
-                messageItemClickListener(messageItem.userName)
-            }
+
             itemView.remove_item.setOnClickListener {
+                messageItemClickListener(messageItem.uid)
                 messageList.removeAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
             }
